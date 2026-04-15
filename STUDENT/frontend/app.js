@@ -1,4 +1,4 @@
-const API_URL = // PORT: 4000, ENDPOINT: /api;;
+const API_URL = "http://localhost:/api"// PORT: 4000, ENDPOINT: /api;;
 
 // ── DOM elemek ────────────────────────────────────────────────────────────────
 
@@ -31,6 +31,15 @@ function modalHide(id) {
 // ── Visszajelzés ──────────────────────────────────────────────────────────────
 
 function uzenetMutat(cim, szoveg, tipus) {
+    document.getElementById("visszajelzesCim").textContent = cim
+
+    const szovegElem = document.getElementById("visszajelzesUzenet")
+    szovegElem.textContent = szoveg;
+    if (tipus == "hiba") {
+        szovegElem.classList.add('mb-0 fw-semibold text-center text-danger')
+    } else {
+        
+    }
 
 }
 
