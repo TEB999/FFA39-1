@@ -38,14 +38,38 @@ function uzenetMutat(cim, szoveg, tipus) {
     if (tipus == "hiba") {
         szovegElem.classList.add('mb-0 fw-semibold text-center text-danger')
     } else {
+        szovegElem.classList.add('mb-0 fw-semibold text-center text-success')
         
     }
-
+    modalShow("visszajelzesModal")
 }
 
 // ── Típusok betöltése ─────────────────────────────────────────────────────────
 
 function tipusokBetoltese(selectId) {
+    const selectElem = document.getElementById(selectId)
+    //validálás
+    if (!selectElem) return
+
+    fetch(API_URL + "/tipusok") 
+    .then(r => r.json())
+    .then(adatok => {
+        adatok.forEach(t => {
+            const options = document.createElement("option");
+            options.value = t.tipus_kod
+            options.textContent =  t.tipus_nev
+            selectElem.appendChild(options)
+        });
+    })
+    .catch(() => {
+        if (fagyiMuveletUzenet) {
+            fagyiMuveletUzenet.textContent = "Nem sikerólt betölteni a tipusokat!"
+            fagyiMuveletUzenet.classList.add("text-danger text-center mb-4")
+        }
+    }
+
+    )
+    
 
 }
 
